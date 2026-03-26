@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marina Toto - Yacht Hostess</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --deep: #1a2e42;
+    --teal: #2a7a8c;
+    --gold: #c9a96e;
+    --sand: #e8dfc8;
+    --light: #f5f0e8;
+    --white: #fdfbf7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--light);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(42,122,140,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(201,169,110,0.08) 0%, transparent 60%),
+      linear-gradient(160deg, #0d1b2a 0%, #1a2e42 50%, #0d1b2a 100%);
+  }
+
+  /* animated water lines */
+  .waves {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
+    overflow: hidden;
+    opacity: 0.18;
+  }
+  .wave {
+    position: absolute; bottom: 0; left: -100%; width: 300%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,100 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z' fill='%232a7a8c'/%3E%3C/svg%3E") repeat-x bottom/600px 100%;
+    animation: waveMove linear infinite;
+  }
+  .wave:nth-child(1) { animation-duration: 12s; opacity: 0.6; }
+  .wave:nth-child(2) { animation-duration: 18s; animation-delay: -4s; opacity: 0.4; transform: scaleY(0.7); }
+  .wave:nth-child(3) { animation-duration: 24s; animation-delay: -8s; opacity: 0.3; transform: scaleY(0.5); }
+  @keyframes waveMove { from { transform: translateX(0); } to { transform: translateX(33.33%); } }
+  .wave:nth-child(2) { animation: waveMove2 18s linear infinite -4s; }
+  .wave:nth-child(3) { animation: waveMove3 24s linear infinite -8s; }
+  @keyframes waveMove2 { from { transform: translateX(0) scaleY(0.7); } to { transform: translateX(33.33%) scaleY(0.7); } }
+  @keyframes waveMove3 { from { transform: translateX(0) scaleY(0.5); } to { transform: translateX(33.33%) scaleY(0.5); } }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(232,223,200,0.7);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 0.9rem 2.8rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    transition: all 0.35s ease;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 280;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(13,27,42,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--sand);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,0.65);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 2rem; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--sand); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--navy); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: rgba(232,223,200,0.75);
+    line-height: 1.85;
+    font-size: 1.02rem;
+    margin-bottom: 1.4rem;
+  }
+  .about-text p strong { color: var(--sand); font-weight: 400; }
+
+  .about-facts { display: flex; flex-direction: column; gap: 0; }
+  .fact {
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(42,122,140,0.2);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .fact:first-child { border-top: 1px solid rgba(42,122,140,0.2); }
+  .fact-icon { font-size: 1.4rem; margin-top: 0.1rem; flex-shrink: 0; }
+  .fact-text strong {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+    font-weight: 400;
+  }
+  .fact-text span {
+    font-size: 0.95rem;
+    color: rgba(232,223,200,0.75);
+    line-height: 1.5;
+  }
+
+  /* ── WHAT I OFFER ── */
+  #offer { background: var(--deep); }
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+  .offer-card {
+    background: rgba(13,27,42,0.6);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .offer-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .offer-card:hover { background: rgba(42,122,140,0.12); }
+  .offer-card:hover::before { transform: scaleX(1); }
+  .offer-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .offer-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--sand);
+    margin-bottom: 0.8rem;
+  }
+  .offer-card p {
+    font-size: 0.9rem;
+    color: rgba(232,223,200,0.6);
+    line-height: 1.7;
+  }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--navy); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--deep);
+  }
+  .gallery-item::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.6) 0%, transparent 50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .gallery-item:hover::before { opacity: 1; }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: brightness(0.9) saturate(0.9);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.04);
+    filter: brightness(1) saturate(1);
+  }
+  .gallery-item-border {
+    position: absolute; inset: 0;
+    border: 1px solid rgba(201,169,110,0);
+    transition: border-color 0.4s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .gallery-item:hover .gallery-item-border {
+    border-color: rgba(201,169,110,0.35);
+  }
+  /* Placeholder shown when no image is set */
+  .gallery-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.8rem;
+    color: rgba(42,122,140,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+  }
+  .gallery-placeholder svg { opacity: 0.3; }
+  @media (max-width: 900px) {
+    .gallery-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .gallery-item { aspect-ratio: 16 / 10; }
+  }
+
+  /* ── LANGUAGES ── */
+  #languages { background: var(--navy); }
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .lang-item { text-align: center; }
+  .lang-flag { font-size: 2.2rem; margin-bottom: 0.6rem; }
+  .lang-name {
+    font-size: 0.85rem;
+    color: var(--sand);
+    margin-bottom: 0.25rem;
+    font-weight: 400;
+  }
+  .lang-level {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .lang-bar-wrap {
+    width: 100%; height: 2px;
+    background: rgba(42,122,140,0.2);
+    margin-top: 0.6rem;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .lang-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    border-radius: 2px;
+  }
+
+  /* ── BACKGROUND ── */
+  #background { background: var(--deep); }
+  .timeline { margin-top: 3rem; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+  }
+  .tl-item {
+    padding: 0 0 2.5rem 2.5rem;
+    position: relative;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 6px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--navy);
+  }
+  .tl-meta {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+  }
+  .tl-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--sand);
+    margin-bottom: 0.4rem;
+  }
+  .tl-item p {
+    font-size: 0.88rem;
+    color: rgba(232,223,200,0.6);
+    line-height: 1.65;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--navy);
+    text-align: center;
+  }
+  .contact-inner { max-width: 580px; margin: 0 auto; }
+  .contact-inner p {
+    color: rgba(232,223,200,0.6);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.7rem;
+    color: var(--sand);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: color 0.25s;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid rgba(201,169,110,0.25);
+    transition: all 0.3s;
+  }
+  .contact-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,169,110,0.05);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(42,122,140,0.15);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(232,223,200,0.25);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.hidden {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── HAMBURGER MENU ── */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+    position: relative;
+    z-index: 300;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--sand);
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(13,27,42,0.98);
+      backdrop-filter: blur(8px);
+      z-index: 250;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .nav-links a {
+      font-size: 1rem;
+      letter-spacing: 0.25em;
+    }
+
+    section { padding: 4.5rem 1.5rem; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .offer-grid { grid-template-columns: 1fr 1fr; }
+    .lang-grid { grid-template-columns: repeat(3, 1fr); }
+
+    #background .bg-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+
+    .hero-tagline { max-width: 100%; }
+    .contact-links { flex-direction: column; align-items: center; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    section { padding: 3.5rem 1.2rem; }
+    .offer-grid { grid-template-columns: 1fr; }
+    .lang-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-cta { padding: 0.8rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Marina Toto</a>
+  <button class="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#offer">What I Offer</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#languages">Languages</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Yacht Hostess &amp; Charter Crew</p>
+    <h1 class="hero-name">Marina<br><em>Toto</em></h1>
+    <p class="hero-tagline">Adriatic-raised. Fluent in five languages. Passionate about hospitality on the water.</p>
+    <a href="#contact" class="hero-cta">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">The sea has always<br>been <em>home</em></h2>
+        <p>Growing up on the Adriatic coast in Rijeka, Croatia - the sea has always been home. Fifteen years on family motor boats; tying knots, reading the water, keeping a vessel running - all of it lives in my hands, not my head. The sea asks something of you in return too - strength, resourcefulness, and the grace to stay steady when conditions are not.</p>
+        <p>I come from a large, food-loving Croatian family. We have our own garden, and I grew up learning not just how to cook, but how to recognise truly good produce - what's ripe, what's seasonal, what's worth building a meal around. Cooking for a crowd, improvising with what's fresh, making people feel genuinely cared for - these are things I've done all my life. On a yacht, that translates directly.</p>
+        <p>After a decade in international project management across Berlin, Ljubljana, Salerno, Zurich and Kastav (Rijeka), working with people from all over the world, I'm bringing that same <strong>organisational precision</strong>, <strong>warmth</strong>, and <strong>adaptability</strong> to life on the water - where I've always belonged.</p>
+      </div>
+      <div class="about-facts reveal">
+        <div class="fact">
+          <div class="fact-icon">⚓</div>
+          <div class="fact-text">
+            <strong>Boat Life</strong>
+            <span>Years of personal experience on boats - comfortable with knots, harbour entry manoeuvring, buoy handling, and keeping a vessel shipshape.</span>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">🍽️</div>
+          <div class="fact-text">
+            <strong>Galley Cooking</strong>
+            <span>Raised in a big Croatian family with a deep food culture. Cooking for groups, from simple to celebratory, is a joy.</span>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">🌍</div>
+          <div class="fact-text">
+            <strong>5 Languages</strong>
+            <span>Croatian, English, German, Slovenian, Italian - able to communicate with guests and crew across the Med and beyond.</span>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">🗂️</div>
+          <div class="fact-text">
+            <strong>Highly Organised</strong>
+            <span>A decade managing complex projects for international clients. Provisioning, scheduling, and logistics feel natural.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I OFFER -->
+<section id="offer">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">What I Offer</p>
+      <h2 class="section-title">Hospitality that feels<br><em>effortless</em></h2>
+    </div>
+    <div class="offer-grid">
+      <div class="offer-card reveal">
+        <div class="offer-icon">👩‍🍳</div>
+        <h3>Galley & Meals</h3>
+        <p>Fresh, thoughtful cooking for guests and crew. From relaxed lunches underway to special dinners in port - including dietary needs and preferences.</p>
+      </div>
+      <div class="offer-card reveal">
+        <div class="offer-icon">✨</div>
+        <h3>Vessel Care</h3>
+        <p>Keeping the interior immaculate and welcoming. Cabin turnover, linen management, provisioning and supplies - handled with care and attention to detail.</p>
+      </div>
+      <div class="offer-card reveal">
+        <div class="offer-icon">🤝</div>
+        <h3>Guest Experience</h3>
+        <p>Warm, professional interaction with charter guests from the first welcome to departure. Anticipating needs before they're asked.</p>
+      </div>
+      <div class="offer-card reveal">
+        <div class="offer-icon">🧭</div>
+        <h3>On-Board Comfort</h3>
+        <p>Familiar with life underway - sea conditions, space constraints, provisioning for passages. Unflappable and adaptable in every situation.</p>
+      </div>
+      <div class="offer-card reveal">
+        <div class="offer-icon">📋</div>
+        <h3>Organisation & Logistics</h3>
+        <p>Provisioning lists, itinerary coordination, marina bookings. My project management background makes planning and logistics second nature.</p>
+      </div>
+      <div class="offer-card reveal">
+        <div class="offer-icon">💬</div>
+        <h3>Multilingual Service</h3>
+        <p>Serving guests in their own language makes all the difference. Fluent in Croatian, English, German, Slovenian, and Italian - Spanish conversational.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">Life on the <em>water & land</em></h2>
+    </div>
+    <div class="gallery-grid">
+
+      <!-- IMAGE 1 — replace "photo1.jpg" with your image filename -->
+      <div class="gallery-item reveal">
+       <img src="image1.jpeg" alt="Description of photo 1"> 
+        <div class="gallery-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Add photo1.jpg</span>
+        </div>
+        <div class="gallery-item-border"></div>
+      </div>
+
+      <!-- IMAGE 2 — replace "photo2.jpg" with your image filename -->
+      <div class="gallery-item reveal">
+        <img src="image3.jpeg" alt="Description of photo 2"> 
+        <div class="gallery-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Add photo2.jpg</span>
+        </div>
+        <div class="gallery-item-border"></div>
+      </div>
+
+      <!-- IMAGE 3 — replace "photo3.jpg" with your image filename -->
+      <div class="gallery-item reveal">
+        <img src="image2.jpeg" alt="Description of photo 3">
+        <div class="gallery-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Add photo3.jpg</span>
+        </div>
+        <div class="gallery-item-border"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <p class="section-label">Languages</p>
+      <h2 class="section-title">Fluent across the <em>Mediterranean</em></h2>
+    </div>
+    <div class="lang-grid">
+      <div class="lang-item reveal">
+        <div class="lang-flag">🇭🇷</div>
+        <div class="lang-name">Croatian</div>
+        <div class="lang-level">Native · C2</div>
+        <div class="lang-bar-wrap"><div class="lang-bar" style="width:100%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="lang-flag">🇬🇧</div>
+        <div class="lang-name">English</div>
+        <div class="lang-level">Fluent · C2</div>
+        <div class="lang-bar-wrap"><div class="lang-bar" style="width:100%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="lang-flag">🇩🇪</div>
+        <div class="lang-name">German</div>
+        <div class="lang-level">Advanced · C1</div>
+        <div class="lang-bar-wrap"><div class="lang-bar" style="width:88%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="lang-flag">🇸🇮</div>
+        <div class="lang-name">Slovenian</div>
+        <div class="lang-level">Advanced · C1</div>
+        <div class="lang-bar-wrap"><div class="lang-bar" style="width:88%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="lang-flag">🇮🇹</div>
+        <div class="lang-name">Italian</div>
+        <div class="lang-level">Upper Intermediate · B2</div>
+        <div class="lang-bar-wrap"><div class="lang-bar" style="width:72%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="lang-flag">🇪🇸</div>
+        <div class="lang-name">Spanish</div>
+        <div class="lang-level">Intermediate · B1</div>
+        <div class="lang-bar-wrap"><div class="lang-bar" style="width:56%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND -->
+<section id="background">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Background</p>
+      <h2 class="section-title">Built to manage,<br>trained to <em>deliver</em></h2>
+    </div>
+    <div class="bg-grid" style="display:grid; grid-template-columns:1fr 1fr; gap: 4rem; margin-top:1rem;">
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-meta">2024 – Present · Kastav, Croatia</div>
+          <h3>Freelance Project Manager</h3>
+          <p>Website management, integrations, QA and custom implementations for clients. Running my own schedule, accountable to results.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-meta">2022 – 2024 · Berlin, Germany</div>
+          <h3>Solution Engineer - RaiseNow</h3>
+          <p>Technical project delivery and key account management in fintech. Managing high-stakes integrations and migrations for strategic clients.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-meta">2021 – 2022 · Berlin, Germany</div>
+          <h3>Customer Success Manager - Styla</h3>
+          <p>Enterprise account management, requirements analysis, internal prioritisation and close product collaboration.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-meta">2019 – 2020 · Berlin, Germany</div>
+          <h3>Operations Agent - Talixo</h3>
+          <p>A year in a Berlin tech company, gaining operational experience while immersing fully in German.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-meta">2013 – 2018 · Rijeka, Croatia</div>
+          <h3>CEO & Project Manager - Kombinat</h3>
+          <p>Led a team of 19 across 34 projects. PR, copywriting, event management - juggling every role with energy and clarity.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="section-label" style="margin-top:0.2rem">Education</p>
+        <div class="timeline" style="margin-top:1.5rem">
+          <div class="tl-item">
+            <div class="tl-meta">2020 · Berlin</div>
+            <h3>Full-Stack Web Development</h3>
+            <p>Le Wagon Bootcamp - technical foundation that sharpens problem-solving and precision.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-meta">2018 · Ljubljana, Slovenia</div>
+            <h3>Masters - HR & Knowledge Management</h3>
+            <p>Faculty of Social Sciences. Deep training in people, organisations, and communication.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-meta">2011 · Ljubljana, Slovenia</div>
+            <h3>Bachelor - European Studies</h3>
+            <p>Faculty of Social Sciences. Broad cultural and political grounding across the continent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's sail <em>together</em></h2>
+      <p>I'm actively looking for yacht hostess positions for the charter season - short trips and week-long bookings welcome.</p>
+      <div class="contact-links">
+        <a href="/cdn-cgi/l/email-protection#ef828e9d8681848e9b80af88828e8683c18c8082" class="contact-link">
+          <span>✉</span> <span class="__cf_email__" data-cfemail="fc919d8e9592979d8893bc9b919d9590d29f9391">[email&#160;protected]</span>
+        </a>
+        <a href="tel:+4915773410010" class="contact-link">
+          <span>📞</span> +49 157 734 100 10
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Marina Toto · Kastav, Croatia</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+  // Hamburger menu
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', function() {
+    navToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = this.getAttribute('href');
+      navToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+      setTimeout(function() {
+        const el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.remove('hidden');
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach((el) => {
+    el.classList.add('hidden');
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
