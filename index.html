@@ -211,7 +211,8 @@
     align-items: flex-start;
   }
   .fact:first-child { border-top: 1px solid rgba(42,122,140,0.2); }
-  .fact-icon { font-size: 1.4rem; margin-top: 0.1rem; flex-shrink: 0; }
+  .fact-icon { margin-top: 0.1rem; flex-shrink: 0; color: var(--teal); }
+  .fact-icon svg { display: block; }
   .fact-text strong {
     display: block;
     font-size: 0.72rem;
@@ -252,7 +253,8 @@
   }
   .offer-card:hover { background: rgba(42,122,140,0.12); }
   .offer-card:hover::before { transform: scaleX(1); }
-  .offer-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .offer-icon { margin-bottom: 1.2rem; color: var(--teal); }
+  .offer-icon svg { display: block; }
   .offer-card h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
@@ -596,28 +598,28 @@
       </div>
       <div class="about-facts reveal">
         <div class="fact">
-          <div class="fact-icon">⚓</div>
+          <div class="fact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="19"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
           <div class="fact-text">
             <strong>Boat Life</strong>
             <span>Years of personal experience on boats - comfortable with knots, harbour entry manoeuvring, buoy handling, and keeping a vessel shipshape.</span>
           </div>
         </div>
         <div class="fact">
-          <div class="fact-icon">🍽️</div>
+          <div class="fact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
           <div class="fact-text">
             <strong>Galley Cooking</strong>
             <span>Raised in a big Croatian family with a deep food culture. Cooking for groups, from simple to celebratory, is a joy.</span>
           </div>
         </div>
         <div class="fact">
-          <div class="fact-icon">🌍</div>
+          <div class="fact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
           <div class="fact-text">
             <strong>5 Languages</strong>
             <span>Croatian, English, German, Slovenian, Italian - able to communicate with guests and crew across the Med and beyond.</span>
           </div>
         </div>
         <div class="fact">
-          <div class="fact-icon">🗂️</div>
+          <div class="fact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
           <div class="fact-text">
             <strong>Highly Organised</strong>
             <span>A decade managing complex projects for international clients. Provisioning, scheduling, and logistics feel natural.</span>
@@ -637,32 +639,32 @@
     </div>
     <div class="offer-grid">
       <div class="offer-card reveal">
-        <div class="offer-icon">👩‍🍳</div>
+        <div class="offer-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6z"/><line x1="6" y1="17" x2="18" y2="17"/></svg></div>
         <h3>Galley & Meals</h3>
         <p>Fresh, thoughtful cooking for guests and crew. From relaxed lunches underway to special dinners in port - including dietary needs and preferences.</p>
       </div>
       <div class="offer-card reveal">
-        <div class="offer-icon">✨</div>
+        <div class="offer-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
         <h3>Vessel Care</h3>
         <p>Keeping the interior immaculate and welcoming. Cabin turnover, linen management, provisioning and supplies - handled with care and attention to detail.</p>
       </div>
       <div class="offer-card reveal">
-        <div class="offer-icon">🤝</div>
+        <div class="offer-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Guest Experience</h3>
         <p>Warm, professional interaction with charter guests from the first welcome to departure. Anticipating needs before they're asked.</p>
       </div>
       <div class="offer-card reveal">
-        <div class="offer-icon">🧭</div>
+        <div class="offer-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
         <h3>On-Board Comfort</h3>
         <p>Familiar with life underway - sea conditions, space constraints, provisioning for passages. Unflappable and adaptable in every situation.</p>
       </div>
       <div class="offer-card reveal">
-        <div class="offer-icon">📋</div>
+        <div class="offer-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
         <h3>Organisation & Logistics</h3>
         <p>Provisioning lists, itinerary coordination, marina bookings. My project management background makes planning and logistics second nature.</p>
       </div>
       <div class="offer-card reveal">
-        <div class="offer-icon">💬</div>
+        <div class="offer-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3>Multilingual Service</h3>
         <p>Serving guests in their own language makes all the difference. Fluent in Croatian, English, German, Slovenian, and Italian - Spanish conversational.</p>
       </div>
@@ -829,10 +831,12 @@
       <p>I'm actively looking for yacht hostess positions for the charter season - short trips and week-long bookings welcome.</p>
       <div class="contact-links">
         <a href="/cdn-cgi/l/email-protection#ef828e9d8681848e9b80af88828e8683c18c8082" class="contact-link">
-          <span>✉</span> <span class="__cf_email__" data-cfemail="fc919d8e9592979d8893bc9b919d9590d29f9391">[email&#160;protected]</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="__cf_email__" data-cfemail="fc919d8e9592979d8893bc9b919d9590d29f9391">[email&#160;protected]</span>
         </a>
         <a href="tel:+4915773410010" class="contact-link">
-          <span>📞</span> +49 157 734 100 10
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +49 157 734 100 10
         </a>
       </div>
     </div>
